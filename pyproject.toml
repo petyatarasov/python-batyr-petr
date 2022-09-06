@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "python_batyr_petr"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "3.10.6"
 fastapi = "^0.82.0"
 
 
