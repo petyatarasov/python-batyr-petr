@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "python-batyr-petr"
+version = "0.1.0"
+description = ""
+authors = ["petyatarasov <112955136+petyatarasov@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "python_batyr_petr"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.82.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
