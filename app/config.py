@@ -13,7 +13,3 @@ db = PostgresqlDatabase(
     database=DATABASE_NAME,
     dsn=DATABASE_DSN,
 )
-
-
-if __name__ == "__main__":
-    db.connect()

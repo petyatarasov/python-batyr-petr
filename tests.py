@@ -1,4 +1,4 @@
-from main import get_filename
+from app.main import get_filename
 
 
 def test_default_case():
