@@ -1,4 +1,6 @@
+print('mr')
+
+
 if __name__ == "__main__":
     db.connect()
 
-print('mr')
