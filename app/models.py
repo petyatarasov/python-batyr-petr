@@ -17,7 +17,7 @@ class Product(Model):
     )
     name = CharField(
         verbose_name="Название продукта",
-        max_length=100
+        max_length=100,
     )
     amount = IntegerField(
         verbose_name="Количество продукта в автомате",
@@ -25,6 +25,9 @@ class Product(Model):
     button = IntegerField(
         verbose_name="Кнопка для выбора продукта",
     )
+
+    class Meta:
+        database = db
 
 
 class Order(Model):
@@ -42,6 +45,9 @@ class Order(Model):
     transaction_status = CharField(
         verbose_name="Статус заказа"
     )
+
+    class Meta:
+        database = db
 
 
 if __name__ == "__main__":

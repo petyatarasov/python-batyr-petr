@@ -1,3 +1,5 @@
+from config import db
+
 print('mr')
 
 
