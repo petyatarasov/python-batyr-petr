@@ -1,6 +1,9 @@
 from peewee import *
 
-from config import db
+from dependencies import get_db
+
+
+db = get_db()
 
 
 class Product(Model):
@@ -49,7 +52,3 @@ class Order(Model):
     class Meta:
         database = db
 
-
-if __name__ == "__main__":
-    db.connect()
-    db.create_tables([Product, Order])
