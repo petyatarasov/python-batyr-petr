@@ -33,3 +33,14 @@ def get_redis():
     redis = Redis.from_url(url=REDIS_URL)
 
     return redis
+
+def get_redis():
+    redis = Redis.from_url(url=REDIS_URL)
+
+    return redis
+
+def get_queue():
+    redis = get_redis()
+    queue = Queue(connection=redis)
+
+    return queue
