@@ -7,7 +7,7 @@ env = Env()
 env.read_env()
 
 DATABASE_NAME = env("DATABASE_NAME")
-DATABASE_DSN = env("DATABASE_DSN")
+DATABASE_URL = env("DATABASE_URL")
 
 REDIS_URL = env("REDIS_URL")
 
@@ -19,7 +19,7 @@ def get_db():
 
     db = PostgresqlDatabase(
         database=DATABASE_NAME,
-        dsn=DATABASE_DSN,
+        dsn=DATABASE_URL,
     )
     db.connect()
 
