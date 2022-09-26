@@ -12,18 +12,12 @@ DATABASE_DSN = env("DATABASE_DSN")
 REDIS_URL = env("REDIS_URL")
 
 
-db = PostgresqlDatabase(
-    database=DATABASE_NAME,
-    dsn=DATABASE_DSN,
-)
-
-
 def get_db():
     """
     зависиость, которая возвращает соединение с бд
     """
 
-    db = postgresqlDatabase(
+    db = PostgresqlDatabase(
         database=DATABASE_NAME,
         dsn=DATABASE_DSN,
     )

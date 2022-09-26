@@ -39,7 +39,7 @@ def get_product(pk: int) -> ProductResponseSchema:
     return product_serialized
 
 @app.post("/products")
-def create_product(body: ProductRequestSchema) -> ProductResponseSchema
+def create_product(body: ProductRequestSchema) -> ProductResponseSchema:
     product = Product.create(
         price=body.price,
         name=body.name,
