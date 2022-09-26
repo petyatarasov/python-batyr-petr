@@ -1,6 +1,7 @@
 from peewee import *
 from environs import Env
 from redis import Redis
+from rq import Queue
 
 
 env = Env()
