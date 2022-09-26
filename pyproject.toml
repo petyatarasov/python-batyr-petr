@@ -15,6 +15,7 @@ psycopg2-binary = "^2.9.3"
 environs = "^9.5.0"
 uvicorn = "^0.18.3"
 redis = "^4.3.4"
+rq = "^1.11.1"
 
 
 [build-system]
