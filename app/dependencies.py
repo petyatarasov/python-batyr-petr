@@ -1,4 +1,4 @@
- from peewee import *
+from peewee import *
 from environs import Env
 from redis import Redis
 

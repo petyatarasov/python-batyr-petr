@@ -14,14 +14,6 @@ class ProductRequestSchema(BaseModel):
     class Config:
         orm_mode = True
 
-    @validator("age")
-    def not_too_old(cls, value: int):
-        if value >= AGE_OLD_LIMIT:
-            raise ValueError("too-old-for-backend")
-
-        return value
-
-
 class ProductResponseSchema(ProductRequestSchema):
     """
     схема ответа от сервера [client <- back]

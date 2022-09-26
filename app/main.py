@@ -38,6 +38,19 @@ def get_product(pk: int) -> ProductResponseSchema:
 
     return product_serialized
 
+@app.post("/products")
+def create_product(body: ProductRequestSchema) -> ProductResponseSchema
+    product: Product.create(
+        price=body.price,
+        name=body.name,
+        amount=body.amount,
+        button=body.button,
+    )
+
+    product_serialized = ProductResponseSchema.from_orm(product)
+
+    return product_serialized
+
 @app.get("/sleep")
 def make_sleep():
     sleep(TIME_TO_SLEEP)
