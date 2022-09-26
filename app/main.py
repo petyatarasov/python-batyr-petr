@@ -3,9 +3,10 @@ from time import sleep
 
 from fastapi import FastAPI, Depends
 
-from dependencies import get_db
+from dependencies import get_db, get_queue
 from models import Product
 from schemas import ProductResponseSchema, ProductRequestSchema
+from tasks import show_hello
 
 app = FastAPI(dependencies=[Depends(get_db)])
 
@@ -61,5 +62,16 @@ def make_sleep():
 def delete_product(pk: int) -> dict:
     product = Product.get_by_id(pk)
     product.delete_instance()
+
+    return {}
+
+@app.post("run-task")
+def run_task() -> dict:
+    """
+    endpoint for launch show_hello to message broker
+    """
+
+    queue = get_queue()
+    queue.enqueue(show_hello, TIME_TO_SLEEP)
 
     return {}
