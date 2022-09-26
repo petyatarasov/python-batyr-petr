@@ -1,17 +1,6 @@
-from fastapi import Depends
-
-
-def show_hello():
-    print("Hello")
-    return {"a": 1, "b": 2}
-
-
-def show_world(hello=Depends(show_hello)):
-    print("World")
-    return [1, 2, 3]
-
-from peewee import *
+ from peewee import *
 from environs import Env
+from redis import Redis
 
 
 env = Env()
@@ -19,6 +8,8 @@ env.read_env()
 
 DATABASE_NAME = env("DATABASE_NAME")
 DATABASE_DSN = env("DATABASE_DSN")
+
+REDIS_URL = env("REDIS_URL")
 
 
 db = PostgresqlDatabase(
@@ -39,3 +30,12 @@ def get_db():
     db.connect()
 
     return db
+
+def get_redis():
+    """
+    возвращает соед с редис 
+    """
+
+    redis = Redis.from_url(url=REDIS_URL)
+
+    return redis
