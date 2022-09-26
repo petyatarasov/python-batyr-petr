@@ -65,7 +65,7 @@ def delete_product(pk: int) -> dict:
 
     return {}
 
-@app.post("run-task")
+@app.post("/run-task")
 def run_task() -> dict:
     """
     endpoint for launch show_hello to message broker
