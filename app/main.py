@@ -40,7 +40,7 @@ def get_product(pk: int) -> ProductResponseSchema:
 
 @app.post("/products")
 def create_product(body: ProductRequestSchema) -> ProductResponseSchema
-    product: Product.create(
+    product = Product.create(
         price=body.price,
         name=body.name,
         amount=body.amount,
