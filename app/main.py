@@ -5,7 +5,7 @@ from fastapi import FastAPI, Depends
 
 from dependencies import get_db, get_queue
 from models import Product
-from schemas import ProductResponseSchema, ProductRequestSchema
+from schemas import ProductResponseSchema, ProductRequestSchema, ProductUpdateSchema
 from tasks import show_hello
 
 app = FastAPI(dependencies=[Depends(get_db)])
@@ -51,6 +51,21 @@ def create_product(body: ProductRequestSchema) -> ProductResponseSchema:
     product_serialized = ProductResponseSchema.from_orm(product)
 
     return product_serialized
+
+@app.patch("/products/{pk}")
+def update_product(pk: int, body: ProductUpdateSchema) -> ProductResponseSchema:
+    product = Product.get_by_id(pk)
+
+    for key, value in body.dict(exclude_unset=True).items():
+        setattr(product, key, value)
+
+
+    product.save()
+
+    response = ProductResponseSchema.from_orm(product)
+
+    return response
+
 
 @app.get("/sleep")
 def make_sleep():
