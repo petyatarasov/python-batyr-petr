@@ -4,8 +4,8 @@ from time import sleep
 from fastapi import FastAPI, Depends
 
 from dependencies import get_db, get_queue
-from models import Product
-from schemas import ProductResponseSchema, ProductRequestSchema, ProductUpdateSchema
+from models import Product, Order
+from schemas import ProductResponseSchema, ProductRequestSchema, ProductUpdateSchema, OrderRequestSchema, OrderResponseSchema
 from tasks import show_hello
 
 app = FastAPI(dependencies=[Depends(get_db)])
@@ -90,3 +90,20 @@ def run_task() -> dict:
     queue.enqueue(show_hello, TIME_TO_SLEEP)
 
     return {}
+
+@app.post("/orders")
+def create_order(body: OrderRequestSchema) -> OrderResponseSchema:
+    """
+    prod and ts in the body
+    """
+    order = Order.create(
+        #будут product_id, transaction_status и id
+        product=body.product,
+        transaction_status=body.transaction_status,
+    )
+
+    order_serialized = OrderResponseSchema.from_orm(order)
+    #OrderResponseSchema ждем поля prod, ts and id
+    #Мы даем product, transaction_status and id
+
+    return order_serialized

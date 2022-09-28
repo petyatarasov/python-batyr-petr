@@ -38,3 +38,22 @@ class ProductUpdateSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class OrderRequestSchema(BaseModel):
+
+    product: int
+    transaction_status: str
+
+    class Config:
+        orm_mode = True
+
+
+class OrderResponseSchema(BaseModel):
+
+    id: int
+    transaction_status: str
+
+
+    class Config:
+        orm_mode = True
