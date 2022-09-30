@@ -104,7 +104,7 @@ def create_order(body: OrderRequestSchema) -> OrderResponseSchema:
     )
 
     queue = get_queue()
-    queue.enqueue(sell_product, order.pk)
+    queue.enqueue(sell_product, order.id)
 
     order_serialized = OrderResponseSchema.from_orm(order)
     #OrderResponseSchema ждем поля prod, ts and id
