@@ -7,6 +7,7 @@ from dependencies import get_db, get_queue
 from models import Product, Order
 from schemas import ProductResponseSchema, ProductRequestSchema, ProductUpdateSchema, OrderRequestSchema, OrderResponseSchema
 from tasks import show_hello
+from tasks import sell_product
 
 app = FastAPI(dependencies=[Depends(get_db)])
 
@@ -101,6 +102,9 @@ def create_order(body: OrderRequestSchema) -> OrderResponseSchema:
         product=body.product,
         transaction_status=body.transaction_status,
     )
+
+    queue = get_queue()
+    queue.enqueue(sell_product, order.pk)
 
     order_serialized = OrderResponseSchema.from_orm(order)
     #OrderResponseSchema ждем поля prod, ts and id
