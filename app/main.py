@@ -107,3 +107,14 @@ def create_order(body: OrderRequestSchema) -> OrderResponseSchema:
     #Мы даем product, transaction_status and id
 
     return order_serialized
+
+@app.post("/orders/{pk}")
+def cancel_order(pk: int) -> OrderResponseSchema:
+    order = Order.get_by_id(pk)
+    order.transaction_status = "Cancel"
+
+    order.save()
+
+    response = OrderResponseSchema.from_orm(order)
+
+    return response
